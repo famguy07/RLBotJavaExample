@@ -1,8 +1,8 @@
-package rlbotexample.input.ball;
+package fambot.input.ball;
 
 
+import fambot.vector.Vector3;
 import rlbot.flat.Touch;
-import rlbotexample.vector.Vector3;
 
 /**
  * Basic information about the ball's latest touch.

@@ -1,4 +1,4 @@
-package rlbotexample.output;
+package fambot.output;
 
 import rlbot.ControllerState;
 

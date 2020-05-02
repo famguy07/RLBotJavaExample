@@ -1,11 +1,12 @@
-package rlbotexample.prediction;
+package fambot.prediction;
 
 import rlbot.flat.BallPrediction;
 import rlbot.flat.PredictionSlice;
 import rlbot.render.Renderer;
-import rlbotexample.vector.Vector3;
 
 import java.awt.*;
+
+import fambot.vector.Vector3;
 
 /**
  * This class can help you get started with ball prediction. Feel free to change it as much as you want,

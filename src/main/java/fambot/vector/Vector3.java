@@ -1,4 +1,4 @@
-package rlbotexample.vector;
+package fambot.vector;
 
 import com.google.flatbuffers.FlatBufferBuilder;
 

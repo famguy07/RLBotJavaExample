@@ -1,14 +1,15 @@
-package rlbotexample.boost;
-
-import rlbot.cppinterop.RLBotDll;
-import rlbot.flat.BoostPadState;
-import rlbot.flat.FieldInfo;
-import rlbot.flat.GameTickPacket;
-import rlbotexample.vector.Vector3;
+package fambot.boost;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+import fambot.vector.Vector2;
+import fambot.vector.Vector3;
+import rlbot.cppinterop.RLBotDll;
+import rlbot.flat.BoostPadState;
+import rlbot.flat.FieldInfo;
+import rlbot.flat.GameTickPacket;
 
 /**
  * Information about where boost pads are located on the field and what status they have.
@@ -69,4 +70,20 @@ public class BoostManager {
         }
     }
 
+    //TODO get BoostPadState from GameTickPacket and allow passing of pad that is inactive but about to be active
+    public static BoostPad nearestBoost(Vector2 carLocation, boolean full, boolean active){
+    	double dist = Double.MAX_VALUE;
+    	BoostPad pad = null;
+    	List<BoostPad> boosts = full ? fullBoosts : orderedBoosts;
+    	for (BoostPad thisPad : boosts) {
+    		Vector2 padLocation = thisPad.getLocation().flatten();
+    		double thisDist = padLocation.distance(carLocation);
+			//System.out.println("ID: " + Thread.currentThread().getId() + "\tChecking Pad: " + thisPad.getLocation().x + " " + thisPad.getLocation().y + "\tThis Dist: " + thisDist + "\tDist :" + dist);
+    		if (thisDist < dist && (active && thisPad.isActive() || (!active))) {
+    			dist = thisDist;
+    			pad = thisPad;
+    		}
+    	}
+    	return pad;
+    }
 }

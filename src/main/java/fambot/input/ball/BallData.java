@@ -1,8 +1,8 @@
-package rlbotexample.input.ball;
+package fambot.input.ball;
 
 
+import fambot.vector.Vector3;
 import rlbot.flat.BallInfo;
-import rlbotexample.vector.Vector3;
 
 /**
  * Basic information about the ball.
@@ -15,7 +15,7 @@ public class BallData {
     public final Vector3 velocity;
     public final Vector3 spin;
     public final BallTouch latestTouch;
-    public final boolean hasBeenTouched;
+    public boolean hasBeenTouched;
 
     public BallData(final BallInfo ball) {
         this.position = new Vector3(ball.physics().location());
@@ -24,4 +24,6 @@ public class BallData {
         this.hasBeenTouched = ball.latestTouch() != null;
         this.latestTouch = this.hasBeenTouched ? new BallTouch(ball.latestTouch()) : null;
     }
+    
+    
 }

@@ -1,4 +1,4 @@
-package rlbotexample.vector;
+package fambot.vector;
 
 /**
  * A vector that only knows about x and y components.

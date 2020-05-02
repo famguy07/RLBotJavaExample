@@ -1,11 +1,12 @@
-package rlbotexample.input;
-
-import rlbot.flat.GameTickPacket;
-import rlbotexample.input.ball.BallData;
-import rlbotexample.input.car.CarData;
+package fambot.input;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import fambot.input.ball.BallData;
+import fambot.input.car.CarData;
+import rlbot.flat.GameInfo;
+import rlbot.flat.GameTickPacket;
 
 /**
  * This class is here for your convenience, it is NOT part of the framework. You can change it as much
@@ -15,26 +16,23 @@ import java.util.List;
  * and leave your bot logic alone.
  */
 public class DataPacket {
-
-    /** Your own car, based on the playerIndex */
-    public final CarData car;
-
+	
+	public final CarData car;
     public final List<CarData> allCars;
-
+    public final GameInfo gameInfo;
     public final BallData ball;
     public final int team;
-
-    /** The index of your player */
     public final int playerIndex;
 
-    public DataPacket(GameTickPacket request, int playerIndex) {
+    public DataPacket(GameTickPacket packet, int playerIndex) {
 
-        this.playerIndex = playerIndex;
-        this.ball = new BallData(request.ball());
+		this.gameInfo = packet.gameInfo();
+		this.playerIndex = playerIndex;
+        this.ball = new BallData(packet.ball());
 
         allCars = new ArrayList<>();
-        for (int i = 0; i < request.playersLength(); i++) {
-            allCars.add(new CarData(request.players(i), request.gameInfo().secondsElapsed()));
+        for (int i = 0; i < packet.playersLength(); i++) {
+            allCars.add(new CarData(packet.players(i), packet.gameInfo().secondsElapsed()));
         }
 
         this.car = allCars.get(playerIndex);

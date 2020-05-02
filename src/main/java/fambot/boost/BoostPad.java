@@ -1,7 +1,7 @@
-package rlbotexample.boost;
+package fambot.boost;
 
 
-import rlbotexample.vector.Vector3;
+import fambot.vector.Vector3;
 
 /**
  * Representation of one of the boost pads on the field.

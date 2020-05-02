@@ -1,10 +1,12 @@
-package rlbotexample;
+package fambot;
 
 import rlbot.manager.BotManager;
-import rlbotexample.util.PortReader;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
+
+import fambot.util.PortReader;
+
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.net.URL;
@@ -14,7 +16,7 @@ import java.util.stream.Collectors;
 /**
  * See JavaAgent.py for usage instructions.
  *
- * Look inside SampleBot.java for the actual bot logic!
+ * Look inside FamBot07.java for the actual bot logic!
  */
 public class JavaExample {
 
@@ -28,7 +30,7 @@ public class JavaExample {
             return DEFAULT_PORT;
         });
 
-        SamplePythonInterface pythonInterface = new SamplePythonInterface(port, botManager);
+        FamBotPythonInterface pythonInterface = new FamBotPythonInterface(port, botManager);
         new Thread(pythonInterface::start).start();
 
         displayWindow(botManager, port);

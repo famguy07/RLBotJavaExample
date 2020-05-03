@@ -60,6 +60,7 @@ public class ControlsOutput implements ControllerState {
 
     public ControlsOutput withJump(boolean jumpDepressed) {
         this.jumpDepressed = jumpDepressed;
+    	System.out.println(this.jumpDepressed);
         return this;
     }
 
@@ -80,6 +81,7 @@ public class ControlsOutput implements ControllerState {
 
     public ControlsOutput withJump() {
         this.jumpDepressed = true;
+    	System.out.println(this.jumpDepressed);
         return this;
     }
 

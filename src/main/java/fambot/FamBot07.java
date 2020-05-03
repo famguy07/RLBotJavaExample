@@ -1,8 +1,8 @@
 package fambot;
 
 import fambot.boost.BoostManager;
-import fambot.controller.DefaultController;
-import fambot.controller.FamBotActions;
+import fambot.controller.Controller;
+import fambot.controller.TestController;
 import fambot.input.DataPacket;
 import fambot.output.ControlsOutput;
 import fambot.util.DebugDrawer;
@@ -13,7 +13,7 @@ import rlbot.flat.GameTickPacket;
 public class FamBot07 implements Bot {
 
 	private final int playerIndex;
-	private FamBotMemory memory = new FamBotMemory();
+	private Controller controller = new TestController();
 
 	public FamBot07(int playerIndex) {
 		this.playerIndex = playerIndex;
@@ -25,16 +25,16 @@ public class FamBot07 implements Bot {
 	 */
 	private ControlsOutput processInput(DataPacket input) {
 		//overwrite the incorrect touch from the previous goal or reset
+		System.out.println(input.gameInfo.isKickoffPause());
 		if (input.gameInfo.isKickoffPause()) {
-			memory.resetKickoff();
 			input.ball.hasBeenTouched = false;
 		}
 		
 		// This is optional!
 		DebugDrawer.drawDebugLines(this, input);
 
-		DefaultController.setState(input);
-		return DefaultController.getControl(input, memory);
+		controller.setState(input);
+		return controller.getControl(input);
 	}
 	
 	

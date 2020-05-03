@@ -30,6 +30,10 @@ public class BoostManager {
     public static List<BoostPad> getSmallBoosts() {
         return smallBoosts;
     }
+    
+    public static List<BoostPad> getBoosts() {
+        return orderedBoosts;
+    }
 
     private static void loadFieldInfo(FieldInfo fieldInfo) {
 

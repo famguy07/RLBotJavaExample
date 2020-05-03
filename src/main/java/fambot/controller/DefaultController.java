@@ -1,20 +1,21 @@
 package fambot.controller;
 
-import fambot.FamBotMemory;
+import fambot.actions.FamBotActions;
+import fambot.actions.FamBotKickoffs;
 import fambot.input.DataPacket;
 import fambot.output.ControlsOutput;
 
-public class DefaultController {
-	private static String state = "default";
-	
-	public static void setState(DataPacket input) {
-		System.out.println("ID: " + Thread.currentThread().getId() + "\tBall Touched: " + input.ball.hasBeenTouched);
+public class DefaultController extends Controller{
+	private String state = "default";
+
+	public void setState(DataPacket input) {
 		if (!input.ball.hasBeenTouched) {
 			state = "kickoff";
 			return;
 		}
 		
 		if (input.ball.hasBeenTouched && state.equals("kickoff")) {
+			setKickoffBoost(-1);
 			state = "default";
 		}
 		
@@ -27,7 +28,7 @@ public class DefaultController {
 		}
 	}
 	
-	public static ControlsOutput getControl(DataPacket input, FamBotMemory memory) {
+	public ControlsOutput getControl(DataPacket input) {
 		System.out.println("ID: " + Thread.currentThread().getId() + "\tState: " + state);
 		ControlsOutput output = null;
 		switch (state) {
@@ -35,10 +36,10 @@ public class DefaultController {
 				output = FamBotActions.getNearestLargeBoost(input);
 				break;
 			case "kickoff":
-				output = FamBotActions.kickoff(input, memory);
+				output = FamBotKickoffs.kickoffKill(input, this);
 				break;
 			default:
-				output = FamBotActions.ballChase(input);
+				output = FamBotActions.ballChaseWithFlip(input, this);
 		}
 		return output;
 	}
